@@ -36,7 +36,7 @@ while True:
         if idade > 18 and c == 11:
             c=0
             print("BEM-VINDO!!")
-            logins = open("logins.txt", "w")
+            logins = open("logins.txt", "a")
             nomeSemEspacos = nome.strip()
             nomeDeUser = str(nomeSemEspacos.lower())
             listaDeUser.append(nomeDeUser)
