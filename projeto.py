@@ -26,6 +26,7 @@ while True:
         entrada1 = int(input())
     if entrada1 == 1:
         os.system('cls')
+        listaDeUser = []
         nome = input("Nome: ")
         print("OBS: digite apenas os numeros do CPF!!")
         cpf = input("CPF: ")
@@ -35,7 +36,21 @@ while True:
         if idade > 18 and c == 11:
             c=0
             print("BEM-VINDO!!")
+            logins = open("logins.txt", "w")
+            nomeSemEspacos = nome.strip()
+            nomeDeUser = str(nomeSemEspacos.lower())
+            listaDeUser.append(nomeDeUser)
+            listaDeUser.append(idade)
+            listaDeUser.append(cpf)
+            logins.writelines(str(listaDeUser))
+            logins.close()
+            c2 += 1
+            print(c2)
+            print("!MENU!")
+            print("Digite 4 para voltar para o MENU!!")
             seila = input()
+            if seila == 4:
+                break
     elif entrada1 == 2:
         os.system('cls')
         pass
