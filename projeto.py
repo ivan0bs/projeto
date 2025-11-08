@@ -1,22 +1,10 @@
 import os
 import time as tm
-c = 0
-while True:
-    os.system('cls')
-    print("===========================MENU===========================")
-    print("")
-    print("Digite qual sua escolha!!")
-    print("")
-    print("1️⃣ -Cadastrar")
-    print("2️⃣ -Entrar")
-    print("➜ 🚪 -Sair")
-    print("")
-    entrada1 = int(input())
-    while entrada1 <= 0 or entrada1 >= 4:
+def menu():
+    while True:
         os.system('cls')
-        print("Número inválido!!")
-        print("Por favor digite um número válido!!!")
         print("===========================MENU===========================")
+        print("")
         print("Digite qual sua escolha!!")
         print("")
         print("1️⃣ -Cadastrar")
@@ -24,36 +12,104 @@ while True:
         print("➜ 🚪 -Sair")
         print("")
         entrada1 = int(input())
-    if entrada1 == 1:
-        os.system('cls')
-        listaDeUser = []
-        nome = input("Nome: ")
-        print("OBS: digite apenas os numeros do CPF!!")
-        cpf = input("CPF: ")
-        for i in cpf:
-            c += 1
+        while entrada1 <= 0 or entrada1 >= 4:
+            os.system('cls')
+            print("Número inválido!!")
+            print("Por favor digite um número válido!!!")
+            print("===========================MENU===========================")
+            print("Digite qual sua escolha!!")
+            print("")
+            print("1️⃣ -Cadastrar")
+            print("2️⃣ -Entrar")
+            print("➜ 🚪 -Sair")
+            print("")
+            entrada1 = int(input())
+        if entrada1 == 1:
+            cadastrar()
+        if entrada1 == 2:
+            entrar()
+        else:
+            os.system('cls')
+            break
+def cadastrar():
+    os.system('cls')
+    print("========================CADASTRAR========================")
+    listaDeUser = []
+    nome = input("Nome: ")
+    while True:
+        logins = open("logins.txt", "r")
+        #logins.white("Primeira linha do arquivo.\n Segunda linha do arquivo.\n")
+        lines = logins.readlines()
+        for contas in lines:
+            pass
+        logins.close()
+        if nome in contas:
+            print("\033[1mNOME EXISTENTE\033[0m")
+            nome = input("Nome: ")
+        else:
+            break
+    print("OBS: digite apenas os numeros do CPF!!")
+    cpf = input("CPF: ")
+    while True:
+        logins = open("logins.txt", "r")
+        #logins.white("Primeira linha do arquivo.\n Segunda linha do arquivo.\n")
+        lines = logins.readlines()
+        for contas in lines:
+            pass
+        logins.close()
+        if cpf in contas:
+            print("\033[1mCPF JA REGISTRADO\033[0m")
+            cpf = input("CPF: ")
+        else:
+            break
+    contadorCPF = 0
+    for i in cpf:
+        contadorCPF += 1
+    idade = int(input("Idade: "))
+    while idade <3 and idade>150:
+        print("Idade invalida!!")
         idade = int(input("Idade: "))
-        if idade > 18 and c == 11:
-            c=0
-            print("BEM-VINDO!!")
-            logins = open("logins.txt", "a")
-            nomeSemEspacos = nome.strip()
-            nomeDeUser = str(nomeSemEspacos.lower())
-            listaDeUser.append(nomeDeUser)
-            listaDeUser.append(idade)
-            listaDeUser.append(cpf)
-            logins.writelines(str(listaDeUser))
-            logins.close()
-            c2 += 1
-            print(c2)
-            print("!MENU!")
-            print("Digite 4 para voltar para o MENU!!")
-            seila = input()
-            if seila == 4:
-                break
-    elif entrada1 == 2:
+        if idade >3 and idade<150:
+            break
+    print("Senha deve conter 8 digitos ou caracteres")
+    senhaDeUser = input("Senha: ")
+    contadorSenha = 0
+    for i in senhaDeUser:
+        contador2 +=1
+    if idade > 18 and contadorCPF == 11 and contadorSenha == 8:
+        contador=0
         os.system('cls')
-        pass
+        tm.sleep(1)
+        print("BEM-VINDO!!")
+        logins = open("logins.txt", "a")
+        nomeDeUser = str(nome.strip().lower())
+        listaDeUser.append(nomeDeUser)
+        listaDeUser.append(senhaDeUser)
+        listaDeUser.append(idade)
+        listaDeUser.append(cpf)
+        cadastro = str(listaDeUser)
+        logins.writelines(f"\n{cadastro}")
+        logins.close()
+        tm.sleep(5)
+        os.system('cls')
+        print("!MENU!")
+        print("Digite 4 para voltar para o MENU!!")
+        voltarParaMenur = int(input())
+        if voltarParaMenur == 4:
+            menu()
     else:
-        os.system('cls')
-        break
+        menu()
+def entrar():
+    os.system('cls')
+    print("==========================ENTRAR==========================")
+    nome = input("User: ")
+    senha = input("Senha: ")
+    logins = open("logins.txt", "r")
+    #logins.white("Primeira linha do arquivo.\n Segunda linha do arquivo.\n")
+    lines = logins.readlines()
+    for contas in lines:
+        pass
+    logins.close()
+    print(contas)
+    seila = input()
+menu()
