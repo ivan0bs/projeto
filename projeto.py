@@ -35,7 +35,7 @@ def cadastrar():
     os.system('cls')
     print("========================CADASTRAR========================")
     listaDeUser = []
-    nome = input("Nome: ")
+    nomeNovo = input("Nome: ")
     while True:
         logins = open("logins.txt", "r")
         #logins.white("Primeira linha do arquivo.\n Segunda linha do arquivo.\n")
@@ -43,9 +43,9 @@ def cadastrar():
         for contas in lines:
             pass
         logins.close()
-        if nome in contas:
+        if nomeNovo in contas:
             print("\033[1mNOME EXISTENTE\033[0m")
-            nome = input("Nome: ")
+            nomeNovo = input("Nome: ")
         else:
             break
     print("OBS: digite apenas os numeros do CPF!!")
@@ -104,12 +104,20 @@ def entrar():
     print("==========================ENTRAR==========================")
     nome = input("User: ")
     senha = input("Senha: ")
-    logins = open("logins.txt", "r")
-    #logins.white("Primeira linha do arquivo.\n Segunda linha do arquivo.\n")
-    lines = logins.readlines()
-    for contas in lines:
-        pass
-    logins.close()
-    print(contas)
+    while True:
+        logins = open("logins.txt", "r")
+        #logins.white("Primeira linha do arquivo.\n Segunda linha do arquivo.\n")
+        lines = logins.readlines()
+        for contas in lines:
+            pass
+        logins.close()
+        if nome in contas:
+            print("\033[1mUSER EXISTENTE\033[0m")
+            break
+        else:
+            print("\033[1mUSER NÃO EXISTENTE\033[0m")
+            print("Você sera redirigido para a pagina de login")
+            tm.sleep(10)
+            print("USER NÃO EXISTENTE")
     seila = input()
 menu()
