@@ -2,6 +2,38 @@ import os
 import json
 import time as tm
 valor = 0
+produtos = [
+    {
+        "feijao": 10,
+        "arroz": 10, 
+        "macarrao": 10, 
+        "peitodefrango": 10
+    },
+    {
+        "detegente": 10, 
+        "aguasanitaria": 10, 
+        "sabaoempo": 10, 
+        "desinfetante": 10
+    },
+    {
+        "papel": 10, 
+        "pastadedente": 10
+    }
+]
+userPadrao = [
+    {
+        "nome": "admin",
+        "senha": "admin123",
+        "idade": 19,
+        "cpf": "12312312300"
+    }
+]
+if not os.path.exists("produtos.json"):
+    with open("produtos.json", "w") as produtos_json:
+        json.dump(produtos, produtos_json, indent=4)
+if not os.path.exists("logins.json"):
+    with open("logins.json", "w",encoding="utf-8") as logins:
+        json.dump(userPadrao, logins,indent=4,ensure_ascii=False)
 def menu():
     while True:
         os.system('cls')
@@ -14,25 +46,18 @@ def menu():
         print("3️⃣ -Sair")
         print("")
         entrada1 = int(input())
-        while entrada1 <= 0 or entrada1 >= 4:
-            os.system('cls')
-            print("Número inválido!!")
-            print("Por favor digite um número válido!!!")
-            print("===========================MENU===========================")
-            print("Digite qual sua escolha!!")
-            print("")
-            print("1️⃣ -Cadastrar")
-            print("2️⃣ -Entrar")
-            print("3️⃣ -Sair")
-            print("")
-            entrada1 = int(input())
         if entrada1 == 1:
-            cadastrar()
-        if entrada1 == 2:
-            entrar()
-        else:
+            return cadastrar()
+        elif entrada1 == 2:
+            return entrar()
+        elif entrada1 == 3:
             os.system('cls')
-            break
+            print("Finalizando...")
+            tm.sleep(2)
+            exit()
+        else:
+            print("Número inválido!")
+            tm.sleep(1)
 def menurAlternativo():
     while True:
         os.system('cls')
@@ -45,36 +70,24 @@ def menurAlternativo():
         print("3️⃣ -Sair")
         print("")
         entrada1 = int(input())
-        if entrada1 <= 0 or entrada1 >= 4:
-            print("Número inválido!!")
-            print("Por favor digite um número válido!!!")
-            entrada1 = int(input())
-        else:
-             break
-    if entrada1 == 1:
-            menurPrincipal()
-    if entrada1 == 2:
-            pass
-    if entrada1 == 3:
-        os.system('cls')
-        return
-def menurPrincipal():
-        global valor
-        os.system('cls')
-        print("BEM-VINDO!!")
-        tm.sleep(3)
-        os.system('cls')
-        print("!MENU!")
-        print("Digite 4 para voltar para o MENU!!")
-        print("1️⃣- Itens de Alimenticios")
-        print("2️⃣- Itens de Limpeza")
-        print("3️⃣- Itens de Igiene Pessoal")
-        print("")
-        escolha= int(input("Digite o número do Produto:"))
-        while escolha <= 0 or escolha >= 5:
-            print("Número inválido!!")
-            print("Por favor digite um número válido!!!")
+        if entrada1 == 1:
+            return menurPrincipal()
+        elif entrada1 == 2:
+                pass
+        elif entrada1 == 3:
+            print("Finalizando...")
             tm.sleep(2)
+            os.system('cls')
+            return
+        else:
+            print("Número inválido!!")
+            tm.sleep(2)
+def menurPrincipal():
+        while True:
+            global valor
+            os.system('cls')
+            print("BEM-VINDO!!")
+            tm.sleep(3)
             os.system('cls')
             print("!MENU!")
             print("Digite 4 para voltar para o MENU!!")
@@ -82,337 +95,346 @@ def menurPrincipal():
             print("2️⃣- Itens de Limpeza")
             print("3️⃣- Itens de Igiene Pessoal")
             print("")
-            escolha= int(input("Digite o número do Produto:"))
-        if escolha == 1:
-                os.system('cls')
-                print("5️⃣- Voltar!")
-                print("6️⃣- Confirma comprar!")
-                print("==============Itens Alimentícios==============")
-                print("1️⃣- Feijão = R$ 6,00")
-                valorDoFejao = 6
-                print("2️⃣- Arroz = R$ 5,00")
-                valorDoArroz = 5
-                print("3️⃣- Macarrão = R$ 4,50")
-                valorDoMacaarrao = 4.50
-                print("4️⃣- Peito de Frango = R$ 20,00")
-                valorDoPeitoDeFrango = 20
-                itensAlimenticios = int(input("Digite o número do Produto: "))
-                if itensAlimenticios == 1:
-                    with open("produtos.json", "r") as arquivo:
-                        dados = json.load(arquivo)
-                        feijao = dados[0].get("feijao", 0)
-                    if feijao <= 0:
-                        print("⚠️ Feijão fora de estoque!")
-                        tm.sleep(2)
+            escolha= int(input("Digite o número do Produto: "))
+            if escolha == 1:
+                    os.system('cls')
+                    print("5️⃣- Voltar!")
+                    print("6️⃣- Confirma comprar!")
+                    print("==============Itens Alimentícios==============")
+                    print("1️⃣- Feijão = R$ 6,00")
+                    valorDoFejao = 6
+                    print("2️⃣- Arroz = R$ 5,00")
+                    valorDoArroz = 5
+                    print("3️⃣- Macarrão = R$ 4,50")
+                    valorDoMacaarrao = 4.50
+                    print("4️⃣- Peito de Frango = R$ 20,00")
+                    valorDoPeitoDeFrango = 20
+                    itensAlimenticios = int(input("Digite o número do Produto: "))
+                    if itensAlimenticios == 1:
+                        with open("produtos.json", "r") as arquivo:
+                            dados = json.load(arquivo)
+                            feijao = dados[0].get("feijao", 0)
+                        if feijao <= 0:
+                            print("⚠️ Feijão fora de estoque!")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        quantoUnidades = int(input(f"Feijão tem {feijao} unidades. Quantas unidades quer? "))
+                        if quantoUnidades > feijao:
+                            print("❌ Não há unidades suficientes em estoque.")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        dados[0]["feijao"] = feijao - quantoUnidades
+                        with open("produtos.json", "w") as arquivo:
+                            json.dump(dados, arquivo)
+                        print("1️⃣- Confimar Compra!!")
+                        print("2️⃣- Para continuar comprando")
+                        voltar = int(input())
+                        if voltar == 1:
+                            valor += valorDoFejao*quantoUnidades
+                            print(f"Comprar no Valor: {valor}R$")
+                            print("Finalizando Comprar...")
+                            tm.sleep(10)
+                            exit()
+                        if voltar == 2:
+                            valor += valorDoFejao*quantoUnidades
+                            pass
+                    if itensAlimenticios == 2:
+                        with open("produtos.json", "r") as arquivo:
+                            dados = json.load(arquivo)
+                        arroz = dados[0].get("arroz", 0)
+                        if arroz <= 0:
+                            print("⚠️ Arroz fora de estoque!")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        quantoUnidades = int(input(f"Arroz tem {arroz} unidades. Quantas unidades quer? "))
+                        if quantoUnidades > arroz:
+                            print("❌ Não há unidades suficientes.")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        dados[0]["arroz"] = arroz - quantoUnidades
+                        with open("produtos.json", "w") as arquivo:
+                            json.dump(dados, arquivo)
+                        print("1️⃣- Confimar Compra!!")
+                        print("2️⃣- Para continuar comprando")
+                        voltar2 = int(input())
+                        if voltar2 == 1:
+                            valor += valorDoArroz*quantoUnidades
+                            print(f"Comprar no Valor: {valor}R$")
+                            print("Finalizando Comprar...")
+                            tm.sleep(10)
+                            exit()
+                        if voltar2 == 2:
+                            valor += valorDoArroz*quantoUnidades
+                            pass
+                    if itensAlimenticios == 3:
+                        with open("produtos.json", "r") as arquivo:
+                            dados = json.load(arquivo)
+                        macarrao = dados[0].get("macarrao", 0)
+                        if macarrao <= 0:
+                            print("⚠️ macarrao fora de estoque!")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        quantoUnidades = int(input(f"Macarrão tem {macarrao} unidades. Quantas unidades quer? "))
+                        if quantoUnidades > macarrao:
+                            print("❌ Não há unidades suficientes.")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        dados[0]["macarrao"] = macarrao - quantoUnidades
+                        with open("produtos.json", "w") as arquivo:
+                            json.dump(dados, arquivo)
+                        print("1️⃣- Confimar Compra!!")
+                        print("2️⃣- Para continuar comprando")
+                        voltar2 = int(input())
+                        if voltar2 == 1:
+                            valor += valorDoMacaarrao*quantoUnidades
+                            print(f"Comprar no Valor: {valor}R$")
+                            print("Finalizando Comprar...")
+                            tm.sleep(10)
+                            exit()
+                        if voltar2 == 2:
+                            valor += valorDoMacaarrao*quantoUnidades
+                            pass
+                    if itensAlimenticios == 4:
+                        with open("produtos.json", "r") as arquivo:
+                            dados = json.load(arquivo)
+                        peitodefrango = dados[0].get("peitodefrango", 0)
+                        if peitodefrango <= 0:
+                            print("⚠️ Peito de Frango fora de estoque!")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        quantoUnidades = int(input(f"Peito de Frango tem {peitodefrango} unidades. Quantas unidades quer? "))
+                        if quantoUnidades > peitodefrango:
+                            print("❌ Não há unidades suficientes.")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        dados[0]["peitodefrango"] = peitodefrango - quantoUnidades
+                        with open("produtos.json", "w") as arquivo:
+                            json.dump(dados, arquivo)
+                        print("1️⃣- Confimar Compra!!")
+                        print("2️⃣- Para continuar comprando")
+                        voltar2 = int(input())
+                        if voltar2 == 1:
+                            valor += valorDoPeitoDeFrango*quantoUnidades
+                            print(f"Comprar no Valor: {valor}R$")
+                            print("Finalizando Comprar...")
+                            tm.sleep(10)
+                            exit()
+                        if voltar2 == 2:
+                            valor += valorDoPeitoDeFrango*quantoUnidades
+                            pass
+                    if itensAlimenticios == 5:
                         return menurPrincipal()
-                    quantoUnidades = int(input(f"Feijão tem {feijao} unidades. Quantas unidades quer?"))
-                    if quantoUnidades > feijao:
-                        print("❌ Não há unidades suficientes em estoque.")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    dados[0]["feijao"] = feijao - quantoUnidades
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(dados, arquivo)
-                    print("1️⃣- Confimar Compra!!")
-                    print(" 2️⃣- Para continuar comprando")
-                    voltar = int(input())
-                    if voltar == 1:
-                        valor += valorDoFejao*quantoUnidades
-                        print(f"Comprar no Valor: {valor}R$")
-                        tm.sleep(15)
-                        return menurAlternativo()
-                    if voltar == 2:
-                        valor += valorDoFejao*quantoUnidades
-                        pass
-                if itensAlimenticios == 2:
-                    with open("produtos.json", "r") as arquivo:
-                        dados = json.load(arquivo)
-                    arroz = dados[0].get("arroz", 0)
-                    if arroz <= 0:
-                        print("⚠️ Arroz fora de estoque!")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    quantoUnidades = int(input(f"Arroz tem {arroz} unidades. Quantas unidades quer?"))
-                    if quantoUnidades > arroz:
-                        print("❌ Não há unidades suficientes.")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    dados[0]["arroz"] = arroz - quantoUnidades
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(dados, arquivo)
-                    print("1️⃣- Confimar Compra!!")
-                    print(" 2️⃣- Para continuar comprando")
-                    voltar2 = int(input())
-                    if voltar2 == 1:
-                        valor += valorDoArroz*quantoUnidades
-                        print(f"Comprar no Valor: {valor}R$")
-                        tm.sleep(15)
-                        return menurAlternativo()
-                    if voltar2 == 2:
-                        valor += valorDoArroz*quantoUnidades
-                        pass
-                if itensAlimenticios == 3:
-                    with open("produtos.json", "r") as arquivo:
-                        dados = json.load(arquivo)
-                    macarrao = dados[0].get("macarrao", 0)
-                    if macarrao <= 0:
-                        print("⚠️ macarrao fora de estoque!")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    quantoUnidades = int(input(f"Macarrão tem {macarrao} unidades. Quantas unidades quer?"))
-                    if quantoUnidades > macarrao:
-                        print("❌ Não há unidades suficientes.")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    dados[0]["macarrao"] = macarrao - quantoUnidades
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(dados, arquivo)
-                    print("1️⃣- Confimar Compra!!")
-                    print(" 2️⃣- Para continuar comprando")
-                    voltar2 = int(input())
-                    if voltar2 == 1:
-                        valor += valorDoMacaarrao*quantoUnidades
-                        print(f"Comprar no Valor: {valor}R$")
-                        tm.sleep(15)
-                        return menurAlternativo()
-                    if voltar2 == 2:
-                        valor += valorDoMacaarrao*quantoUnidades
-                        pass
-                if itensAlimenticios == 4:
-                    with open("produtos.json", "r") as arquivo:
-                        dados = json.load(arquivo)
-                    peitodefrango = dados[0].get("peitodefrango", 0)
-                    if peitodefrango <= 0:
-                        print("⚠️ Peito de Frango fora de estoque!")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    quantoUnidades = int(input(f"Peito de Frango tem {peitodefrango} unidades. Quantas unidades quer?"))
-                    if quantoUnidades > peitodefrango:
-                        print("❌ Não há unidades suficientes.")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    dados[0]["peitodefrango"] = peitodefrango - quantoUnidades
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(dados, arquivo)
-                    print("1️⃣- Confimar Compra!!")
-                    print(" 2️⃣- Para continuar comprando")
-                    voltar2 = int(input())
-                    if voltar2 == 1:
-                        valor += valorDoPeitoDeFrango*quantoUnidades
-                        print(f"Comprar no Valor: {valor}R$")
-                        tm.sleep(15)
-                        return menurAlternativo()
-                    if voltar2 == 2:
-                        valor += valorDoPeitoDeFrango*quantoUnidades
-                        pass
-                if itensAlimenticios == 5:
-                    menurPrincipal()
-        if escolha == 2:
-                os.system('cls')
-                print("""5️⃣- Voltar!
-                 6️⃣- Confirma comprar!""")
-                print(" ")
-                print("2️⃣- Itens De Limpeza")
-                print(" ")
-                print("1️⃣- Detergente = R$ 6,00")
-                valorDetergente = 6
-                print("2️⃣- Água Sanitária = R$ 12,00")
-                valorAguaSanitaria = 12
-                print("3️⃣- Sabão em Pó = R$ 8,00")
-                valorSabaoEmPo = 8
-                print("4️⃣- Desinfetante = R$ 14,00")
-                valorDesinfetante = 14
-                itensDeLimpeza = int(input("Digite o número do Produto: "))
-                if itensDeLimpeza == 1:
-                    with open("produtos.json", "r") as arquivo:
-                        dados = json.load(arquivo)
-                    detegente = dados[1].get("detegente", 0)
-                    if detegente <= 0:
-                        print("⚠️ Feijão fora de estoque!")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    quantoUnidades = int(input(f"Feijão tem {detegente} unidades. Quantas unidades quer?"))
-                    if quantoUnidades > detegente:
-                        print("❌ Não há unidades suficientes em estoque.")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    dados[1]["detegente"] = detegente - quantoUnidades
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(dados, arquivo)
-                    print("1️⃣- Confimar Compra!!")
-                    print("2️⃣- Continuar comprando")
-                    voltar = int(input())
-                    if voltar == 1:
-                        valor += valorDetergente*quantoUnidades
-                        print(f"Comprar no Valor: {valor}R$")
-                        tm.sleep(15)
-                        return menurAlternativo()
-                    if voltar == 2:
-                        valor += valorDetergente*quantoUnidades
-                        pass
-                if itensDeLimpeza == 2:
-                    with open("produtos.json", "r") as arquivo:
-                        dados = json.load(arquivo)
-                    aguasanitaria = dados[1].get("aguasanitaria", 0)
-                    if aguasanitaria <= 0:
-                        print("⚠️ Feijão fora de estoque!")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    quantoUnidades = int(input(f"Feijão tem {aguasanitaria} unidades. Quantas unidades quer?"))
-                    if quantoUnidades > aguasanitaria:
-                        print("❌ Não há unidades suficientes em estoque.")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    dados[1]["aguasanitaria"] = aguasanitaria - quantoUnidades
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(dados, arquivo)
-                    print("1️⃣- Confimar Compra!!")
-                    print("2️⃣- Continuar comprando")
-                    voltar = int(input())
-                    if voltar == 1:
-                        valor += valorAguaSanitaria*quantoUnidades
-                        print(f"Comprar no Valor: {valor}R$")
-                        tm.sleep(15)
-                        return menurAlternativo()
-                    if voltar == 2:
-                        valor += valorAguaSanitaria*quantoUnidades
-                        pass
-                if itensDeLimpeza == 3:
-                    with open("produtos.json", "r") as arquivo:
-                        dados = json.load(arquivo)
-                    sabaoempo = dados[1].get("sabaoempo", 0)
-                    if sabaoempo <= 0:
-                        print("⚠️ Feijão fora de estoque!")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    quantoUnidades = int(input(f"Feijão tem {sabaoempo} unidades. Quantas unidades quer?"))
-                    if quantoUnidades > sabaoempo:
-                        print("❌ Não há unidades suficientes em estoque.")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    dados[1]["sabaoempo"] = sabaoempo - quantoUnidades
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(dados, arquivo)
-                    print("1️⃣- Confimar Compra!!")
-                    print("2️⃣- Continuar comprando")
-                    voltar = int(input())
-                    if voltar == 1:
-                        valor += valorSabaoEmPo*quantoUnidades
-                        print(f"Comprar no Valor: {valor}R$")
-                        tm.sleep(15)
-                        return menurAlternativo()
-                    if voltar == 2:
-                        valor += valorSabaoEmPo*quantoUnidades
-                        pass
-                if itensDeLimpeza == 4:
-                    with open("produtos.json", "r") as arquivo:
-                        dados = json.load(arquivo)
-                    desinfetante = dados[1].get("desinfetante", 0)
-                    if desinfetante <= 0:
-                        print("⚠️ Feijão fora de estoque!")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    quantoUnidades = int(input(f"Feijão tem {desinfetante} unidades. Quantas unidades quer?"))
-                    if quantoUnidades > desinfetante:
-                        print("❌ Não há unidades suficientes em estoque.")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    dados[1]["desinfetante"] = desinfetante - quantoUnidades
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(dados, arquivo)
-                    print("1️⃣- Confimar Compra!!")
-                    print("2️⃣- Continuar comprando")
-                    voltar = int(input())
-                    if voltar == 1:
-                        valor += valorPastaDeDente*quantoUnidades
-                        print(f"Comprar no Valor: {valor}R$")
-                        tm.sleep(15)
-                        return menurAlternativo()
-                    if voltar == 2:
-                        valor += valorDesinfetante*quantoUnidades
-                        pass
-        if escolha == 3:
-                os.system('cls')
-                print("""3️⃣- Voltar!
-                4️⃣- Confirma comprar!""")
-                print(" ")
-                print("1️⃣- Itens Alimentícios")
-                print(" ")
-                print("1️⃣- Papel = R$ 10,00")
-                valorPapel = 10
-                print("2️⃣- Pasta de Dente = R$ 8,00")
-                valorPastaDeDente = 8
-                itensDeIgienePessoal = int(input("Digite O número do Produto: "))
-                if itensDeIgienePessoal == 1:
-                    with open("produtos.json", "r") as arquivo:
-                        dados = json.load(arquivo)
-                    papel = dados[2].get("papel", 0)
-                    if papel <= 0:
-                        print("⚠️ Feijão fora de estoque!")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    quantoUnidades = int(input(f"Feijão tem {papel} unidades. Quantas unidades quer?"))
-                    if quantoUnidades > papel:
-                        print("❌ Não há unidades suficientes em estoque.")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    dados[2]["papel"] = papel - quantoUnidades
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(dados, arquivo)
-                    print("1️⃣- Confimar Compra!!")
-                    print("2️⃣- Continuar comprando")
-                    voltar = int(input())
-                    if voltar == 1:
-                        valor += valorPapel*quantoUnidades
-                        print(f"Comprar no Valor: {valor}R$")
-                        tm.sleep(15)
-                        return menurAlternativo()
-                    if voltar == 2:
-                        valor += valorPapel*quantoUnidades
-                        pass
-                if itensDeIgienePessoal == 2:
-                    with open("produtos.json", "r") as arquivo:
-                        dados = json.load(arquivo)
-                    pastadedente = dados[2].get("pastadedente", 0)
-                    if pastadedente <= 0:
-                        print("⚠️ Feijão fora de estoque!")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    quantoUnidades = int(input(f"Feijão tem {pastadedente} unidades. Quantas unidades quer? "))
-                    if quantoUnidades > pastadedente:
-                        print("❌ Não há unidades suficientes em estoque.")
-                        tm.sleep(2)
-                        return menurPrincipal()
-                    dados[2]["pastadedente"] = pastadedente - quantoUnidades
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(dados, arquivo)
-                    print("1️⃣- Confimar Compra!!")
-                    print("2️⃣- Continuar comprando")
-                    voltar = int(input())
-                    if voltar == 1:
-                        valor += valorPastaDeDente*quantoUnidades
-                        print(f"Comprar no Valor: {valor}R$")
-                        tm.sleep(15)
-                        return menurAlternativo()
-                    if voltar == 2:
-                        valor += valorPastaDeDente*quantoUnidades
-                        pass
-        if escolha == 4:
-                menurAlternativo()
+            elif escolha == 2:
+                    os.system('cls')
+                    print("5️⃣- Voltar!")
+                    print("6️⃣- Confirma comprar!")
+                    print("==============Itens De Limpeza==============")
+                    print("1️⃣- Detergente = R$ 6,00")
+                    valorDetergente = 6
+                    print("2️⃣- Água Sanitária = R$ 12,00")
+                    valorAguaSanitaria = 12
+                    print("3️⃣- Sabão em Pó = R$ 8,00")
+                    valorSabaoEmPo = 8
+                    print("4️⃣- Desinfetante = R$ 14,00")
+                    valorDesinfetante = 14
+                    itensDeLimpeza = int(input("Digite o número do Produto: "))
+                    if itensDeLimpeza == 1:
+                        with open("produtos.json", "r") as arquivo:
+                            dados = json.load(arquivo)
+                        detegente = dados[1].get("detegente", 0)
+                        if detegente <= 0:
+                            print("⚠️ Feijão fora de estoque!")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        quantoUnidades = int(input(f"Feijão tem {detegente} unidades. Quantas unidades quer? "))
+                        if quantoUnidades > detegente:
+                            print("❌ Não há unidades suficientes em estoque.")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        dados[1]["detegente"] = detegente - quantoUnidades
+                        with open("produtos.json", "w") as arquivo:
+                            json.dump(dados, arquivo)
+                        print("1️⃣- Confimar Compra!!")
+                        print("2️⃣- Continuar comprando")
+                        voltar = int(input())
+                        if voltar == 1:
+                            valor += valorDetergente*quantoUnidades
+                            print(f"Comprar no Valor: {valor}R$")
+                            print("Finalizando Comprar...")
+                            tm.sleep(10)
+                            exit()
+                        if voltar == 2:
+                            valor += valorDetergente*quantoUnidades
+                            pass
+                    if itensDeLimpeza == 2:
+                        with open("produtos.json", "r") as arquivo:
+                            dados = json.load(arquivo)
+                        aguasanitaria = dados[1].get("aguasanitaria", 0)
+                        if aguasanitaria <= 0:
+                            print("⚠️ Feijão fora de estoque!")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        quantoUnidades = int(input(f"Feijão tem {aguasanitaria} unidades. Quantas unidades quer? "))
+                        if quantoUnidades > aguasanitaria:
+                            print("❌ Não há unidades suficientes em estoque.")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        dados[1]["aguasanitaria"] = aguasanitaria - quantoUnidades
+                        with open("produtos.json", "w") as arquivo:
+                            json.dump(dados, arquivo)
+                        print("1️⃣- Confimar Compra!!")
+                        print("2️⃣- Continuar comprando")
+                        voltar = int(input())
+                        if voltar == 1:
+                            valor += valorAguaSanitaria*quantoUnidades
+                            print(f"Comprar no Valor: {valor}R$")
+                            print("Finalizando Comprar...")
+                            tm.sleep(10)
+                            exit()
+                        if voltar == 2:
+                            valor += valorAguaSanitaria*quantoUnidades
+                            pass
+                    if itensDeLimpeza == 3:
+                        with open("produtos.json", "r") as arquivo:
+                            dados = json.load(arquivo)
+                        sabaoempo = dados[1].get("sabaoempo", 0)
+                        if sabaoempo <= 0:
+                            print("⚠️ Feijão fora de estoque!")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        quantoUnidades = int(input(f"Feijão tem {sabaoempo} unidades. Quantas unidades quer? "))
+                        if quantoUnidades > sabaoempo:
+                            print("❌ Não há unidades suficientes em estoque.")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        dados[1]["sabaoempo"] = sabaoempo - quantoUnidades
+                        with open("produtos.json", "w") as arquivo:
+                            json.dump(dados, arquivo)
+                        print("1️⃣- Confimar Compra!!")
+                        print("2️⃣- Continuar comprando")
+                        voltar = int(input())
+                        if voltar == 1:
+                            valor += valorSabaoEmPo*quantoUnidades
+                            print(f"Comprar no Valor: {valor}R$")
+                            print("Finalizando Comprar...")
+                            tm.sleep(10)
+                            exit()
+                        if voltar == 2:
+                            valor += valorSabaoEmPo*quantoUnidades
+                            pass
+                    if itensDeLimpeza == 4:
+                        with open("produtos.json", "r") as arquivo:
+                            dados = json.load(arquivo)
+                        desinfetante = dados[1].get("desinfetante", 0)
+                        if desinfetante <= 0:
+                            print("⚠️ Feijão fora de estoque!")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        quantoUnidades = int(input(f"Feijão tem {desinfetante} unidades. Quantas unidades quer? "))
+                        if quantoUnidades > desinfetante:
+                            print("❌ Não há unidades suficientes em estoque.")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        dados[1]["desinfetante"] = desinfetante - quantoUnidades
+                        with open("produtos.json", "w") as arquivo:
+                            json.dump(dados, arquivo)
+                        print("1️⃣- Confimar Compra!!")
+                        print("2️⃣- Continuar comprando")
+                        voltar = int(input())
+                        if voltar == 1:
+                            valor += valorDesinfetante*quantoUnidades
+                            print(f"Comprar no Valor: {valor}R$")
+                            print("Finalizando Comprar...")
+                            tm.sleep(10)
+                            exit()
+                        if voltar == 2:
+                            valor += valorDesinfetante*quantoUnidades
+                            pass
+            elif escolha == 3:
+                    os.system('cls')
+                    print("5️⃣- Voltar!")
+                    print("6️⃣- Confirma comprar!")
+                    print("==============Itens De Igiene Pessoal==============")
+                    print("1️⃣- Papel = R$ 10,00")
+                    valorPapel = 10
+                    print("2️⃣- Pasta de Dente = R$ 8,00")
+                    valorPastaDeDente = 8
+                    itensDeIgienePessoal = int(input("Digite O número do Produto: "))
+                    if itensDeIgienePessoal == 1:
+                        with open("produtos.json", "r") as arquivo:
+                            dados = json.load(arquivo)
+                        papel = dados[2].get("papel", 0)
+                        if papel <= 0:
+                            print("⚠️ Feijão fora de estoque!")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        quantoUnidades = int(input(f"Feijão tem {papel} unidades. Quantas unidades quer? "))
+                        if quantoUnidades > papel:
+                            print("❌ Não há unidades suficientes em estoque.")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        dados[2]["papel"] = papel - quantoUnidades
+                        with open("produtos.json", "w") as arquivo:
+                            json.dump(dados, arquivo)
+                        print("1️⃣- Confimar Compra!!")
+                        print("2️⃣- Continuar comprando")
+                        voltar = int(input())
+                        if voltar == 1:
+                            valor += valorPapel*quantoUnidades
+                            print(f"Comprar no Valor: {valor}R$")
+                            print("Finalizando Comprar...")
+                            tm.sleep(10)
+                            exit()
+                        if voltar == 2:
+                            valor += valorPapel*quantoUnidades
+                            pass
+                    if itensDeIgienePessoal == 2:
+                        with open("produtos.json", "r") as arquivo:
+                            dados = json.load(arquivo)
+                        pastadedente = dados[2].get("pastadedente", 0)
+                        if pastadedente <= 0:
+                            print("⚠️ Feijão fora de estoque!")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        quantoUnidades = int(input(f"Feijão tem {pastadedente} unidades. Quantas unidades quer? "))
+                        if quantoUnidades > pastadedente:
+                            print("❌ Não há unidades suficientes em estoque.")
+                            tm.sleep(2)
+                            return menurPrincipal()
+                        dados[2]["pastadedente"] = pastadedente - quantoUnidades
+                        with open("produtos.json", "w") as arquivo:
+                            json.dump(dados, arquivo)
+                        print("1️⃣- Confimar Compra!!")
+                        print("2️⃣- Continuar comprando")
+                        voltar = int(input())
+                        if voltar == 1:
+                            valor += valorPastaDeDente*quantoUnidades
+                            print(f"Comprar no Valor: {valor}R$")
+                            print("Finalizando Comprar...")
+                            tm.sleep(10)
+                            exit()
+                        if voltar == 2:
+                            valor += valorPastaDeDente*quantoUnidades
+                            pass
+            elif escolha == 4:
+                return menurAlternativo()
+            else:
+                print("Número inválido!!")
+                tm.sleep(2)
 def cadastrar():
     os.system('cls')
     print("========================CADASTRAR========================")
     with open("logins.json", "r") as arquivo:
         usuarios = json.load(arquivo)
     nomeNovo = input("Nome: ").strip().lower()
-    for u in usuarios:
-        if nomeNovo == u["nome"]:
+    for i in usuarios:
+        if nomeNovo == i["nome"]:
             print("\033[1mNOME EXISTENTE\033[0m")
             return cadastrar()
     print("OBS: digite apenas os numeros do CPF!!")
     cpf = input("CPF: ").strip().lower()
-    for u in usuarios:
-        if cpf == u["cpf"]:
+    for i in usuarios:
+        if cpf == i["cpf"]:
             print("\033[1mCPF JA REGISTRADO\033[0m")
             return cadastrar()
     contadorCPF = 0
@@ -437,11 +459,11 @@ def cadastrar():
             "cpf": cpf
         }
         usuarios.append(novoUsuario)
-        with open("logins.json", "w") as arquivo:
-            json.dump(usuarios, arquivo)
-        menurPrincipal()
+        with open("logins.json", "w",encoding="utf-8") as arquivo:
+            json.dump(usuarios, arquivo,indent=4,ensure_ascii=False)
+        return menurPrincipal()
     else:
-        menu()
+        return menu()
 def entrar():
     os.system('cls')
     print("==========================ENTRAR==========================")
@@ -460,5 +482,5 @@ def entrar():
                 print("==========================ENTRAR==========================")
         if fechar == 1:
             break
-    menurPrincipal()
+    return menurPrincipal()
 menu()

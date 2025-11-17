@@ -1,1 +1,26 @@
-[{"nome": "ivan", "senha": "12345678", "idade": 20, "cpf": "11122233344"}, {"nome": "joao", "senha": "helicoptero", "idade": 21, "cpf": "22233344455"}]
+[
+    {
+        "nome": "ivan",
+        "senha": "12345678",
+        "idade": 20,
+        "cpf": "11122233344"
+    },
+    {
+        "nome": "joao",
+        "senha": "helicoptero",
+        "idade": 21,
+        "cpf": "22233344455"
+    },
+    {
+        "nome": "pÃ©dro",
+        "senha": "helicoptero",
+        "idade": 53,
+        "cpf": "11155564588"
+    },
+    {
+        "nome": "joão",
+        "senha": "joãozinho",
+        "idade": 20,
+        "cpf": "11155544499"
+    }
+]
