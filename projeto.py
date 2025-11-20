@@ -4,19 +4,33 @@ import time as tm
 valor = 0
 produtos = [
     {
-        "feijao": 10,
-        "arroz": 10, 
-        "macarrao": 10, 
+        "feijao": 10
+    },
+    {
+        "arroz": 10
+    },
+    {
+        "macarrao": 10
+    },
+    {
         "peitodefrango": 10
     },
     {
-        "detegente": 10, 
-        "aguasanitaria": 10, 
-        "sabaoempo": 10, 
+        "detegente": 10
+    },
+    {
+        "aguasanitaria": 10
+    },
+    {
+        "sabaoempo": 10
+    },
+    {
         "desinfetante": 10
     },
     {
-        "papel": 10, 
+        "papel": 10
+    },
+    {
         "pastadedente": 10
     }
 ]
@@ -73,7 +87,7 @@ def menurAlternativo():
         if entrada1 == 1:
             return menurPrincipal()
         elif entrada1 == 2:
-                pass
+            pass
         elif entrada1 == 3:
             print("Finalizando...")
             tm.sleep(2)
@@ -96,6 +110,8 @@ def menurPrincipal():
             print("3️⃣- Itens de Igiene Pessoal")
             print("")
             escolha= int(input("Digite o número do Produto: "))
+            if escolha == 1413914:
+                return admin()
             if escolha == 1:
                     os.system('cls')
                     print("5️⃣- Voltar!")
@@ -125,7 +141,7 @@ def menurPrincipal():
                             return menurPrincipal()
                         dados[0]["feijao"] = feijao - quantoUnidades
                         with open("produtos.json", "w") as arquivo:
-                            json.dump(dados, arquivo)
+                            json.dump(dados, arquivo, indent=4)
                         print("1️⃣- Confimar Compra!!")
                         print("2️⃣- Para continuar comprando")
                         voltar = int(input())
@@ -134,14 +150,14 @@ def menurPrincipal():
                             print(f"Comprar no Valor: {valor}R$")
                             print("Finalizando Comprar...")
                             tm.sleep(10)
-                            exit()
+                            return menurPrincipal()
                         if voltar == 2:
                             valor += valorDoFejao*quantoUnidades
                             pass
                     if itensAlimenticios == 2:
                         with open("produtos.json", "r") as arquivo:
                             dados = json.load(arquivo)
-                        arroz = dados[0].get("arroz", 0)
+                        arroz = dados[1].get("arroz", 0)
                         if arroz <= 0:
                             print("⚠️ Arroz fora de estoque!")
                             tm.sleep(2)
@@ -151,9 +167,9 @@ def menurPrincipal():
                             print("❌ Não há unidades suficientes.")
                             tm.sleep(2)
                             return menurPrincipal()
-                        dados[0]["arroz"] = arroz - quantoUnidades
+                        dados[1]["arroz"] = arroz - quantoUnidades
                         with open("produtos.json", "w") as arquivo:
-                            json.dump(dados, arquivo)
+                            json.dump(dados, arquivo,indent=4)
                         print("1️⃣- Confimar Compra!!")
                         print("2️⃣- Para continuar comprando")
                         voltar2 = int(input())
@@ -162,14 +178,14 @@ def menurPrincipal():
                             print(f"Comprar no Valor: {valor}R$")
                             print("Finalizando Comprar...")
                             tm.sleep(10)
-                            exit()
+                            return menurPrincipal()
                         if voltar2 == 2:
                             valor += valorDoArroz*quantoUnidades
                             pass
                     if itensAlimenticios == 3:
                         with open("produtos.json", "r") as arquivo:
                             dados = json.load(arquivo)
-                        macarrao = dados[0].get("macarrao", 0)
+                        macarrao = dados[2].get("macarrao", 0)
                         if macarrao <= 0:
                             print("⚠️ macarrao fora de estoque!")
                             tm.sleep(2)
@@ -179,9 +195,9 @@ def menurPrincipal():
                             print("❌ Não há unidades suficientes.")
                             tm.sleep(2)
                             return menurPrincipal()
-                        dados[0]["macarrao"] = macarrao - quantoUnidades
+                        dados[2]["macarrao"] = macarrao - quantoUnidades
                         with open("produtos.json", "w") as arquivo:
-                            json.dump(dados, arquivo)
+                            json.dump(dados, arquivo,indent=4)
                         print("1️⃣- Confimar Compra!!")
                         print("2️⃣- Para continuar comprando")
                         voltar2 = int(input())
@@ -190,14 +206,14 @@ def menurPrincipal():
                             print(f"Comprar no Valor: {valor}R$")
                             print("Finalizando Comprar...")
                             tm.sleep(10)
-                            exit()
+                            return menurPrincipal()
                         if voltar2 == 2:
                             valor += valorDoMacaarrao*quantoUnidades
                             pass
                     if itensAlimenticios == 4:
                         with open("produtos.json", "r") as arquivo:
                             dados = json.load(arquivo)
-                        peitodefrango = dados[0].get("peitodefrango", 0)
+                        peitodefrango = dados[3].get("peitodefrango", 0)
                         if peitodefrango <= 0:
                             print("⚠️ Peito de Frango fora de estoque!")
                             tm.sleep(2)
@@ -207,9 +223,9 @@ def menurPrincipal():
                             print("❌ Não há unidades suficientes.")
                             tm.sleep(2)
                             return menurPrincipal()
-                        dados[0]["peitodefrango"] = peitodefrango - quantoUnidades
+                        dados[3]["peitodefrango"] = peitodefrango - quantoUnidades
                         with open("produtos.json", "w") as arquivo:
-                            json.dump(dados, arquivo)
+                            json.dump(dados, arquivo,indent=4)
                         print("1️⃣- Confimar Compra!!")
                         print("2️⃣- Para continuar comprando")
                         voltar2 = int(input())
@@ -218,7 +234,7 @@ def menurPrincipal():
                             print(f"Comprar no Valor: {valor}R$")
                             print("Finalizando Comprar...")
                             tm.sleep(10)
-                            exit()
+                            return menurPrincipal()
                         if voltar2 == 2:
                             valor += valorDoPeitoDeFrango*quantoUnidades
                             pass
@@ -241,7 +257,7 @@ def menurPrincipal():
                     if itensDeLimpeza == 1:
                         with open("produtos.json", "r") as arquivo:
                             dados = json.load(arquivo)
-                        detegente = dados[1].get("detegente", 0)
+                        detegente = dados[4].get("detegente", 0)
                         if detegente <= 0:
                             print("⚠️ Feijão fora de estoque!")
                             tm.sleep(2)
@@ -251,9 +267,9 @@ def menurPrincipal():
                             print("❌ Não há unidades suficientes em estoque.")
                             tm.sleep(2)
                             return menurPrincipal()
-                        dados[1]["detegente"] = detegente - quantoUnidades
+                        dados[4]["detegente"] = detegente - quantoUnidades
                         with open("produtos.json", "w") as arquivo:
-                            json.dump(dados, arquivo)
+                            json.dump(dados, arquivo,indent=4)
                         print("1️⃣- Confimar Compra!!")
                         print("2️⃣- Continuar comprando")
                         voltar = int(input())
@@ -262,14 +278,14 @@ def menurPrincipal():
                             print(f"Comprar no Valor: {valor}R$")
                             print("Finalizando Comprar...")
                             tm.sleep(10)
-                            exit()
+                            return menurPrincipal()
                         if voltar == 2:
                             valor += valorDetergente*quantoUnidades
                             pass
                     if itensDeLimpeza == 2:
                         with open("produtos.json", "r") as arquivo:
                             dados = json.load(arquivo)
-                        aguasanitaria = dados[1].get("aguasanitaria", 0)
+                        aguasanitaria = dados[5].get("aguasanitaria", 0)
                         if aguasanitaria <= 0:
                             print("⚠️ Feijão fora de estoque!")
                             tm.sleep(2)
@@ -279,9 +295,9 @@ def menurPrincipal():
                             print("❌ Não há unidades suficientes em estoque.")
                             tm.sleep(2)
                             return menurPrincipal()
-                        dados[1]["aguasanitaria"] = aguasanitaria - quantoUnidades
+                        dados[5]["aguasanitaria"] = aguasanitaria - quantoUnidades
                         with open("produtos.json", "w") as arquivo:
-                            json.dump(dados, arquivo)
+                            json.dump(dados, arquivo,indent=4)
                         print("1️⃣- Confimar Compra!!")
                         print("2️⃣- Continuar comprando")
                         voltar = int(input())
@@ -290,14 +306,14 @@ def menurPrincipal():
                             print(f"Comprar no Valor: {valor}R$")
                             print("Finalizando Comprar...")
                             tm.sleep(10)
-                            exit()
+                            return menurPrincipal()
                         if voltar == 2:
                             valor += valorAguaSanitaria*quantoUnidades
                             pass
                     if itensDeLimpeza == 3:
                         with open("produtos.json", "r") as arquivo:
                             dados = json.load(arquivo)
-                        sabaoempo = dados[1].get("sabaoempo", 0)
+                        sabaoempo = dados[6].get("sabaoempo", 0)
                         if sabaoempo <= 0:
                             print("⚠️ Feijão fora de estoque!")
                             tm.sleep(2)
@@ -307,9 +323,9 @@ def menurPrincipal():
                             print("❌ Não há unidades suficientes em estoque.")
                             tm.sleep(2)
                             return menurPrincipal()
-                        dados[1]["sabaoempo"] = sabaoempo - quantoUnidades
+                        dados[6]["sabaoempo"] = sabaoempo - quantoUnidades
                         with open("produtos.json", "w") as arquivo:
-                            json.dump(dados, arquivo)
+                            json.dump(dados, arquivo,indent=4)
                         print("1️⃣- Confimar Compra!!")
                         print("2️⃣- Continuar comprando")
                         voltar = int(input())
@@ -318,14 +334,14 @@ def menurPrincipal():
                             print(f"Comprar no Valor: {valor}R$")
                             print("Finalizando Comprar...")
                             tm.sleep(10)
-                            exit()
+                            return menurPrincipal()
                         if voltar == 2:
                             valor += valorSabaoEmPo*quantoUnidades
                             pass
                     if itensDeLimpeza == 4:
                         with open("produtos.json", "r") as arquivo:
                             dados = json.load(arquivo)
-                        desinfetante = dados[1].get("desinfetante", 0)
+                        desinfetante = dados[7].get("desinfetante", 0)
                         if desinfetante <= 0:
                             print("⚠️ Feijão fora de estoque!")
                             tm.sleep(2)
@@ -335,9 +351,9 @@ def menurPrincipal():
                             print("❌ Não há unidades suficientes em estoque.")
                             tm.sleep(2)
                             return menurPrincipal()
-                        dados[1]["desinfetante"] = desinfetante - quantoUnidades
+                        dados[7]["desinfetante"] = desinfetante - quantoUnidades
                         with open("produtos.json", "w") as arquivo:
-                            json.dump(dados, arquivo)
+                            json.dump(dados, arquivo,indent=4)
                         print("1️⃣- Confimar Compra!!")
                         print("2️⃣- Continuar comprando")
                         voltar = int(input())
@@ -346,7 +362,7 @@ def menurPrincipal():
                             print(f"Comprar no Valor: {valor}R$")
                             print("Finalizando Comprar...")
                             tm.sleep(10)
-                            exit()
+                            return menurPrincipal()
                         if voltar == 2:
                             valor += valorDesinfetante*quantoUnidades
                             pass
@@ -363,7 +379,7 @@ def menurPrincipal():
                     if itensDeIgienePessoal == 1:
                         with open("produtos.json", "r") as arquivo:
                             dados = json.load(arquivo)
-                        papel = dados[2].get("papel", 0)
+                        papel = dados[8].get("papel", 0)
                         if papel <= 0:
                             print("⚠️ Feijão fora de estoque!")
                             tm.sleep(2)
@@ -373,9 +389,9 @@ def menurPrincipal():
                             print("❌ Não há unidades suficientes em estoque.")
                             tm.sleep(2)
                             return menurPrincipal()
-                        dados[2]["papel"] = papel - quantoUnidades
+                        dados[8]["papel"] = papel - quantoUnidades
                         with open("produtos.json", "w") as arquivo:
-                            json.dump(dados, arquivo)
+                            json.dump(dados, arquivo,indent=4)
                         print("1️⃣- Confimar Compra!!")
                         print("2️⃣- Continuar comprando")
                         voltar = int(input())
@@ -384,14 +400,14 @@ def menurPrincipal():
                             print(f"Comprar no Valor: {valor}R$")
                             print("Finalizando Comprar...")
                             tm.sleep(10)
-                            exit()
+                            return menurPrincipal()
                         if voltar == 2:
                             valor += valorPapel*quantoUnidades
                             pass
                     if itensDeIgienePessoal == 2:
                         with open("produtos.json", "r") as arquivo:
                             dados = json.load(arquivo)
-                        pastadedente = dados[2].get("pastadedente", 0)
+                        pastadedente = dados[9].get("pastadedente", 0)
                         if pastadedente <= 0:
                             print("⚠️ Feijão fora de estoque!")
                             tm.sleep(2)
@@ -401,9 +417,9 @@ def menurPrincipal():
                             print("❌ Não há unidades suficientes em estoque.")
                             tm.sleep(2)
                             return menurPrincipal()
-                        dados[2]["pastadedente"] = pastadedente - quantoUnidades
+                        dados[9]["pastadedente"] = pastadedente - quantoUnidades
                         with open("produtos.json", "w") as arquivo:
-                            json.dump(dados, arquivo)
+                            json.dump(dados, arquivo,indent=4)
                         print("1️⃣- Confimar Compra!!")
                         print("2️⃣- Continuar comprando")
                         voltar = int(input())
@@ -412,19 +428,121 @@ def menurPrincipal():
                             print(f"Comprar no Valor: {valor}R$")
                             print("Finalizando Comprar...")
                             tm.sleep(10)
-                            exit()
+                            return menurPrincipal()
                         if voltar == 2:
                             valor += valorPastaDeDente*quantoUnidades
-                            pass
             elif escolha == 4:
                 return menurAlternativo()
             else:
                 print("Número inválido!!")
                 tm.sleep(2)
+def admin():
+    os.system("cls")
+    print("1️⃣- Editar Produtos!!")
+    print("2️⃣- Editar Clientes!!")
+    adminEditar = int(input(": "))
+    if adminEditar ==  1:
+        os.system("cls")
+        print("1️⃣- Editar Produtos!!")
+        print("2️⃣- Excluir Produtos!!")
+        ed_ou_ex_DeProdutos = int(input(": "))
+        if ed_ou_ex_DeProdutos == 1:
+            with open("produtos.json", "r") as produtos_json:
+                produtos = json.load(produtos_json)
+                produtos1 = produtos[0]
+                produtos2 = produtos[1]
+                produtos3 = produtos[2]
+            print(produtos)
+        elif ed_ou_ex_DeProdutos == 2:
+            os.system("cls")
+            with open("produtos.json", "r") as arquivo:
+                dados = json.load(arquivo)
+            print("Produtos cadastrados:")
+            for i, item in enumerate(dados):
+                nome = list(item.keys())[0]
+                print(f"{i+1} - {nome}")
+            print("Digite o numero do produto para excluir!")
+            produto = int(input())
+            with open("produtos.json", "r") as produtos_json:
+                produtos = json.load(produtos_json)
+            if produto == 1:
+                produtos.pop(0)
+                with open("produtos.json", "w") as arquivo:
+                    json.dump(produtos, arquivo,indent=4)
+                print("produto excluido!")
+                if produto == 2:
+                    produtos.pop(1)
+                    with open("produtos.json", "w") as arquivo:
+                        json.dump(produtos, arquivo,indent=4)
+                    print("produto excluido!")
+                if produto == 3:
+                    produtos.pop(2)
+                    with open("produtos.json", "w") as arquivo:
+                        json.dump(produtos, arquivo,indent=4)
+                    print("produto excluido!")
+                if produto == 4:
+                    produtos.pop(3)
+                    with open("produtos.json", "w") as arquivo:
+                        json.dump(produtos, arquivo,indent=4)
+                    print("produto excluido!")
+                if produto == 5:
+                    produtos.pop(4)
+                    with open("produtos.json", "w") as arquivo:
+                        json.dump(produtos, arquivo,indent=4)
+                    print("produto excluido!")
+                if produto == 6:
+                    produtos.pop(5)
+                    with open("produtos.json", "w") as arquivo:
+                        json.dump(produtos, arquivo,indent=4)
+                    print("produto excluido!")
+                if produto == 7:
+                    produtos.pop(6)
+                    with open("produtos.json", "w") as arquivo:
+                        json.dump(produtos, arquivo,indent=4)
+                    print("produto excluido!")
+                if produto == 8:
+                    produtos.pop(7)
+                    with open("produtos.json", "w") as arquivo:
+                        json.dump(produtos, arquivo,indent=4)
+                    print("produto excluido!")
+                if produto == 9:
+                    produtos.pop(8)
+                    with open("produtos.json", "w") as arquivo:
+                        json.dump(produtos, arquivo,indent=4)
+                    print("produto excluido!")
+                if produto == 10:
+                    produtos.pop(9)
+                    with open("produtos.json", "w") as arquivo:
+                        json.dump(produtos, arquivo,indent=4)
+                    print("produto excluido!")
+    elif adminEditar == 2:
+        os.system("cls")
+        with open("logins.json", "r", encoding="utf-8") as arquivo:
+            usuarios = json.load(arquivo)
+        print("Digite o nome do Clientes:")
+        cliente = input()
+        for i in usuarios:
+            if cliente == i["nome"]:
+                print("\033[1mUSER ENCONTRADO\033[0m")
+                for i in range(len(usuarios)):
+                    if usuarios[i]["nome"] == cliente:
+                        exCliete = i
+        print("Digite 1 para excluir!")
+        excluir = int(input())
+        if excluir == 1:
+            usuarios.pop(exCliete)
+            with open("logins.json", "w",encoding="utf-8") as arquivo:
+                json.dump(usuarios, arquivo,indent=4,ensure_ascii=False)
+            print("produto excluido!")
+        else:
+            print("User Não encontrado!")
+            return admin()
+    else:
+        return menurPrincipal()
 def cadastrar():
     os.system('cls')
     print("========================CADASTRAR========================")
-    with open("logins.json", "r") as arquivo:
+    with open("logins.json", "r", encoding="utf-8") as arquivo:
         usuarios = json.load(arquivo)
     nomeNovo = input("Nome: ").strip().lower()
     for i in usuarios:
@@ -469,7 +587,7 @@ def entrar():
     print("==========================ENTRAR==========================")
     while True:
         fechar = 0
-        with open("logins.json", "r") as arquivo:
+        with open("logins.json", "r", encoding="utf-8") as arquivo:
             usuarios = json.load(arquivo)
         nome = input("User: ")
         senha = input("Senha: ")

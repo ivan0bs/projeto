@@ -1,18 +1,29 @@
 [
     {
-        "feijao": 10,
-        "arroz": 10,
-        "macarrao": 10,
+        "arroz": 10
+    },
+    {
+        "macarrao": 10
+    },
+    {
         "peitodefrango": 10
     },
     {
-        "detegente": 10,
-        "aguasanitaria": 10,
-        "sabaoempo": 10,
+        "detegente": 10
+    },
+    {
+        "aguasanitaria": 10
+    },
+    {
+        "sabaoempo": 10
+    },
+    {
         "desinfetante": 10
     },
     {
-        "papel": 10,
+        "papel": 10
+    },
+    {
         "pastadedente": 10
     }
 ]
