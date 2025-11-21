@@ -1,29 +1,52 @@
 [
     {
-        "arroz": 10
+        "nome": "FeijÃ£o",
+        "quantidade": 8,
+        "preco": 6
     },
     {
-        "macarrao": 10
+        "nome": "Arroz",
+        "quantidade": 10,
+        "preco": 5
     },
     {
-        "peitodefrango": 10
+        "nome": "MacarrÃ£o",
+        "quantidade": 10,
+        "preco": 4.5
     },
     {
-        "detegente": 10
+        "nome": "Peito de frango",
+        "quantidade": 10,
+        "preco": 20
     },
     {
-        "aguasanitaria": 10
+        "nome": "Detergente",
+        "quantidade": 10,
+        "preco": 6
     },
     {
-        "sabaoempo": 10
+        "nome": "Agua Sanitaria",
+        "quantidade": 10,
+        "preco": 12
     },
     {
-        "desinfetante": 10
+        "nome": "Sabaoempo",
+        "quantidade": 10,
+        "preco": 8
     },
     {
-        "papel": 10
+        "nome": "Desinfetante",
+        "quantidade": 10,
+        "preco": 14
     },
     {
-        "pastadedente": 10
+        "nome": "Papel",
+        "quantidade": 10,
+        "preco": 10
+    },
+    {
+        "nome": "Pasta de dente",
+        "quantidade": 10,
+        "preco": 8
     }
 ]
