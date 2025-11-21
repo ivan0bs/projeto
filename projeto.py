@@ -449,31 +449,33 @@ def menurPrincipal():
 def admin():
     os.system("cls")
     print("1️⃣- Editar Produtos!!")
-    print("2️⃣- Editar Clientes!!")
-    adminEditar = int(input(": "))
+    print("2️⃣- Editar Clientes!!\n3️⃣- Voltar!!")
+    adminEditar = int(input())
     if adminEditar ==  1:
         os.system("cls")
         print("1️⃣- Editar Produtos!!")
         print("2️⃣- Excluir Produtos!!")
-        print("2️⃣- Adicionar Produtos!!")
+        print("3️⃣- Adicionar Produtos!!\n4️⃣- Voltar!!")
+        with open("produtos.json", "r",encoding="utf-8") as arquivo:
+            dados = json.load(arquivo)
         while True:
             try:
-                ed_ou_ex_DeProdutos = int(input(": "))
-                if ed_ou_ex_DeProdutos == 1:
+                ed_ou_ex_DeProdutos = int(input())
+                if ed_ou_ex_DeProdutos >=0:
                     break
                 else:
-                    return admin()
+                    print("Opção invalida!")
+                    continue
             except ValueError:
                 print("❌ Você digitou algo que não é número! Tente novamente.\n")
         if ed_ou_ex_DeProdutos == 1:
             print("Produtos:")
-            with open("produtos.json", "r") as arquivo:
+            with open("produtos.json", "r",encoding="utf-8") as arquivo:
                 dados = json.load(arquivo)
-            print("Produtos cadastrados:")
             for i, item in enumerate(dados):
                 nome = item["nome"]
                 print(f"{i+1} - {nome}")
-            print("Digite o numero do produto para excluir!")
+            print("Digite o numero do produto para Editar!")
             while True:
                 try:
                     produto = int(input())
@@ -525,11 +527,11 @@ def admin():
                     with open("produtos.json", "w",encoding="utf-8") as arquivo:
                         json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
                     print(f"\033[1mA nova quantidade do Produto é {quantidadeEditar}!\033[0m")
-                    tm.sleep(2)
+                    tm.sleep(5)
             return admin()
         elif ed_ou_ex_DeProdutos == 2:
             os.system("cls")
-            with open("produtos.json", "r") as arquivo:
+            with open("produtos.json", "r",encoding="utf-8") as arquivo:
                 dados = json.load(arquivo)
             print("Produtos cadastrados:")
             for i, item in enumerate(dados):
@@ -537,59 +539,79 @@ def admin():
                 print(f"{i+1} - {nome}")
             print("Digite o numero do produto para excluir!")
             produto = int(input())
-            with open("produtos.json", "r") as produtos_json:
+            with open("produtos.json", "r",encoding="utf-8") as produtos_json:
                 produtos = json.load(produtos_json)
             if produto == 1:
                 produtos.pop(0)
-                with open("produtos.json", "w") as arquivo:
-                    json.dump(produtos, arquivo,indent=4)
+                with open("produtos.json", "w",encoding="utf-8") as arquivo:
+                    json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
                 print("produto excluido!")
                 if produto == 2:
                     produtos.pop(1)
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(produtos, arquivo,indent=4)
+                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
+                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
                     print("produto excluido!")
                 if produto == 3:
                     produtos.pop(2)
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(produtos, arquivo,indent=4)
+                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
+                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
                     print("produto excluido!")
                 if produto == 4:
                     produtos.pop(3)
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(produtos, arquivo,indent=4)
+                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
+                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
                     print("produto excluido!")
                 if produto == 5:
                     produtos.pop(4)
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(produtos, arquivo,indent=4)
+                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
+                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
                     print("produto excluido!")
                 if produto == 6:
                     produtos.pop(5)
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(produtos, arquivo,indent=4)
+                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
+                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
                     print("produto excluido!")
                 if produto == 7:
                     produtos.pop(6)
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(produtos, arquivo,indent=4)
+                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
+                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
                     print("produto excluido!")
                 if produto == 8:
                     produtos.pop(7)
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(produtos, arquivo,indent=4)
+                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
+                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
                     print("produto excluido!")
                 if produto == 9:
                     produtos.pop(8)
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(produtos, arquivo,indent=4)
+                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
+                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
                     print("produto excluido!")
                 if produto == 10:
                     produtos.pop(9)
-                    with open("produtos.json", "w") as arquivo:
-                        json.dump(produtos, arquivo,indent=4)
+                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
+                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
                     print("produto excluido!")
-    elif adminEditar == 2:
+        elif ed_ou_ex_DeProdutos == 5:
+            print("1")
+            return admin()
+        elif ed_ou_ex_DeProdutos == 3 and len(dados) <10:
+            nomeDoProduto = input("Qual o nome do Produto? ")
+            quantidadeDeProduto = int(input("Quantas Unidades? "))
+            precoDoProduto = float(input("Qual o preço do produto? "))
+            novoProduto = {
+                "nome": nomeDoProduto.strip().lower(),
+                "quantidade": quantidadeDeProduto,
+                "preco": precoDoProduto
+            }
+            produtos.append(novoProduto)
+            with open("produtos.json", "a",encoding="utf-8") as arquivo:
+                json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
+            print("Produto Registrado!!")
+        else:
+            print("\033[1m!!A lista de produtos ja tem 10 itens!!\033[0m")
+            tm.sleep(2)
+            return admin()
+    if adminEditar == 2:
         os.system("cls")
         with open("logins.json", "r", encoding="utf-8") as arquivo:
             usuarios = json.load(arquivo)
@@ -611,6 +633,8 @@ def admin():
         else:
             print("User Não encontrado!")
             return admin()
+    elif adminEditar == 3:
+        return menurPrincipal()
     else:
         return menurPrincipal()
 def cadastrar():
@@ -776,5 +800,5 @@ def perfil():
                         print("User Não encontrado!")
                         return perfil()
             elif editarConta == 4:
-                pass
+                return menurAlternativo()
 menu()
