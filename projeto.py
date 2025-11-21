@@ -81,7 +81,8 @@ def menurAlternativo():
         print("")
         print("1️⃣ -Produtos")
         print("2️⃣ -Carrinho")
-        print("3️⃣ -Sair")
+        print("3️⃣ -Perfil")
+        print("4️⃣ -Sair")
         print("")
         entrada1 = int(input())
         if entrada1 == 1:
@@ -89,6 +90,8 @@ def menurAlternativo():
         elif entrada1 == 2:
             pass
         elif entrada1 == 3:
+            return perfil()
+        elif entrada1 == 4:
             print("Finalizando...")
             tm.sleep(2)
             os.system('cls')
@@ -533,7 +536,7 @@ def admin():
             usuarios.pop(exCliete)
             with open("logins.json", "w",encoding="utf-8") as arquivo:
                 json.dump(usuarios, arquivo,indent=4,ensure_ascii=False)
-            print("produto excluido!")
+            print("Clientes excluido!")
         else:
             print("User Não encontrado!")
             return admin()
@@ -582,18 +585,24 @@ def cadastrar():
         return menurPrincipal()
     else:
         return menu()
+nomeDeUserEditar = ""
+senhaDeUserEditar = ""
 def entrar():
+    global nomeDeUserEditar
+    global senhaDeUserEditar
     os.system('cls')
     print("==========================ENTRAR==========================")
     while True:
         fechar = 0
         with open("logins.json", "r", encoding="utf-8") as arquivo:
             usuarios = json.load(arquivo)
-        nome = input("User: ")
-        senha = input("Senha: ")
+        nomeDeUser = input("User: ")
+        senhaDeUser = input("Senha: ")
         for u in usuarios:
-            if nome == u["nome"] and senha == u["senha"]:
+            if nomeDeUser == u["nome"] and senhaDeUser == u["senha"]:
                 fechar = 1
+                nomeDeUserEditar = nomeDeUser
+                senhaDeUserEditar = senhaDeUser
                 break
             else:
                 print("\033[1mNOME OU SENHA INVÁLIDO!!\033[0m")
@@ -601,4 +610,100 @@ def entrar():
         if fechar == 1:
             break
     return menurPrincipal()
+def perfil():
+    global nomeDeUserEditar
+    global senhaDeUserEditar
+    with open("logins.json", "r", encoding="utf-8") as arquivo:
+            usuarios = json.load(arquivo)
+    for u in usuarios:
+        if nomeDeUserEditar == u["nome"] and senhaDeUserEditar == u["senha"]:
+            print(f"User:{nomeDeUserEditar}")
+            print(f"Senha:{senhaDeUserEditar}")
+            os.system("cls")
+            print("1️⃣- Editar user!!\n2️⃣- Editar Senha!!\n3️⃣- Excluir User!!")
+            while True:
+                try:
+                    editarConta = int(input("Digite um número: "))
+                    break
+                except ValueError:
+                    print("❌ Você digitou algo que não é número! Tente novamente.\n")
+            if editarConta == 1:
+                while True:
+                    try:
+                        nomeEditar = int(input("Digite 1 para Editar nome: "))
+                        if nomeEditar == 1:
+                            novoNome = input("Digite o novo nome: ")
+                            break
+                        else:
+                            return perfil()
+                    except ValueError:
+                        print("❌ Você digitou algo que não é número! Tente novamente.\n")
+                os.system("cls")
+                if nomeEditar == 1:
+                    with open("logins.json", "r", encoding="utf-8") as arquivo:
+                        usuarios = json.load(arquivo)
+                    for i in usuarios:
+                        if nomeDeUserEditar == i["nome"]:
+                            for i in range(len(usuarios)):
+                                if usuarios[i]["nome"] == nomeDeUserEditar:
+                                    edCliete = i
+                                    if True:
+                                        usuarios[edCliete]["nome"]=novoNome
+                                        with open("logins.json", "w",encoding="utf-8") as arquivo:
+                                            json.dump(usuarios, arquivo,indent=4,ensure_ascii=False)
+                                        print(f"\033[1mUser Alterado agora seu novo nome é {novoNome}!\033[0m")
+                                        tm.sleep(2)
+                return perfil()
+            elif editarConta == 2:
+                while True:
+                    try:
+                        senhaEditar = int(input("Digite 1 para Editar Senha: "))
+                        if senhaEditar == 1:
+                            novaSenha = input("Digite o nova Senha: ")
+                            break
+                        else:
+                            return perfil()
+                    except ValueError:
+                        print("❌ Você digitou algo que não é número! Tente novamente.\n")
+                os.system("cls")
+                if senhaEditar == 1:
+                    with open("logins.json", "r", encoding="utf-8") as arquivo:
+                        usuarios = json.load(arquivo)
+                    for i in usuarios:
+                        if senhaDeUserEditar == i["senha"]:
+                            for i in range(len(usuarios)):
+                                if usuarios[i]["senha"] == senhaDeUserEditar:
+                                    edCliete = i
+                                    if True:
+                                        usuarios[edCliete]["senha"]=novaSenha
+                                        with open("logins.json", "w",encoding="utf-8") as arquivo:
+                                            json.dump(usuarios, arquivo,indent=4,ensure_ascii=False)
+                                        print(f"\033[1mUser Alterado agora seu nova Senha é {novaSenha}!\033[0m")
+                                        tm.sleep(2)
+                return perfil()
+            elif editarConta == 3:
+                while True:
+                    try:
+                        certeza = int(input("Digite 1 para confimar Exclusão: "))
+                        break
+                    except ValueError:
+                        print("❌ Você digitou algo que não é número! Tente novamente.\n")
+                os.system("cls")
+                if certeza == 1:
+                    with open("logins.json", "r", encoding="utf-8") as arquivo:
+                        usuarios = json.load(arquivo)
+                    for i in usuarios:
+                        if nomeDeUserEditar == i["nome"]:
+                            for i in range(len(usuarios)):
+                                if usuarios[i]["nome"] == nomeDeUserEditar:
+                                    exCliete = i
+                    excluir = 1
+                    if excluir == 1:
+                        usuarios.pop(exCliete)
+                        with open("logins.json", "w",encoding="utf-8") as arquivo:
+                            json.dump(usuarios, arquivo,indent=4,ensure_ascii=False)
+                        print("\033[1mUser excluido!\033[0m")
+                    else:
+                        print("User Não encontrado!")
+                        return perfil()
 menu()

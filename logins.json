@@ -1,19 +1,13 @@
 [
     {
-        "nome": "joao",
-        "senha": "helicoptero",
-        "idade": 21,
-        "cpf": "22233344455"
-    },
-    {
-        "nome": "p\u00c3\u00a9dro",
+        "nome": "pÃ©dro",
         "senha": "helicoptero",
         "idade": 53,
         "cpf": "11155564588"
     },
     {
-        "nome": "jo\u00e3o",
-        "senha": "jo\u00e3ozinho",
+        "nome": "ivan",
+        "senha": "joãozinho",
         "idade": 20,
         "cpf": "11155544499"
     },
