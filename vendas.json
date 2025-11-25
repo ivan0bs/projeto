@@ -1,0 +1,32 @@
+[
+    {
+        "produto": "Arroz",
+        "quantidade": 1,
+        "valor_unitario": 5,
+        "valor_total": 5
+    },
+    {
+        "produto": "Peito de frango",
+        "quantidade": 2,
+        "valor_unitario": 20,
+        "valor_total": 40
+    },
+    {
+        "produto": "Peito de frango",
+        "quantidade": 1,
+        "valor_unitario": 20,
+        "valor_total": 20
+    },
+    {
+        "produto": "Detergente",
+        "quantidade": 1,
+        "valor_unitario": 6,
+        "valor_total": 6
+    },
+    {
+        "produto": "Arroz",
+        "quantidade": 1,
+        "valor_unitario": 5,
+        "valor_total": 5
+    }
+]

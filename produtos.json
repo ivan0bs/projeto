@@ -1,27 +1,27 @@
 [
     {
         "nome": "FeijÃ£o",
-        "quantidade": 8,
+        "quantidade": 20,
         "preco": 6
     },
     {
         "nome": "Arroz",
-        "quantidade": 10,
+        "quantidade": 1,
         "preco": 5
     },
     {
         "nome": "MacarrÃ£o",
-        "quantidade": 10,
+        "quantidade": 7,
         "preco": 4.5
     },
     {
         "nome": "Peito de frango",
-        "quantidade": 10,
+        "quantidade": 7,
         "preco": 20
     },
     {
         "nome": "Detergente",
-        "quantidade": 10,
+        "quantidade": 9,
         "preco": 6
     },
     {
