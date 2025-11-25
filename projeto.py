@@ -116,7 +116,7 @@ def menurPrincipal():
                 dados = json.load(arquivo)
             for i, item in enumerate(dados):
                 nome = item["nome"]
-                print(f"{i+1} - {nome}")
+                print(f"{nome}")
             print("1️⃣- Relatorio Produtos!!\n2️⃣- Voltar!!")
             escolha= int(input())
             if escolha == 1:
@@ -126,7 +126,7 @@ def menurPrincipal():
                 for i, item in enumerate(dados):
                     nome = item["nome"]
                     quantidade = item["quantidade"]
-                    print(f"{i+1} - {nome}-{quantidade}")
+                    print(f"{nome}- \033[1m{quantidade}\033[0m unidades")
                 print("1️⃣- Voltar!!")
                 votar = int(input())
                 if votar == 1:
@@ -181,10 +181,11 @@ def admin():
                     print("1️⃣- Editar nome de Produtos!!")
                     print("2️⃣- Editar quantidade de Produtos!!")
                     nomeEditar = int(input())
-                    if nomeEditar > 1:
+                    if nomeEditar == 1:
                         novoNome = input("Digite o novo nome: ")
                         break
-                    if nomeEditar >0:
+                    elif nomeEditar == 2:
+                        quantidadeEditar = int(input("Nova quantidade: "))
                         break
                 except ValueError:
                     print("❌ Você digitou algo que não é número! Tente novamente.\n")
@@ -192,29 +193,17 @@ def admin():
             if nomeEditar == 1:
                 with open("produtos.json", "r", encoding="utf-8") as arquivo:
                     produtos = json.load(arquivo)
-                produto -= 1
                 if True:
-                    produtos[produto]["nome"]=novoNome
+                    produtos[produto -1]["nome"]=novoNome
                     with open("produtos.json", "w",encoding="utf-8") as arquivo:
                         json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
                     print(f"\033[1mNome do Produto Alterado agora o nome é {novoNome}!\033[0m")
                     tm.sleep(2)
             elif nomeEditar ==2:
-                while True:
-                    try:
-                        print("Digite o nova Quantidade!!")
-                        quantidadeEditar = int(input())
-                        if quantidadeEditar > 0:
-                            break
-                        else:
-                            return admin()
-                    except ValueError:
-                        print("❌ Você digitou algo que não é número! Tente novamente.\n")
                 with open("produtos.json", "r", encoding="utf-8") as arquivo:
                     produtos = json.load(arquivo)
-                produto -= 1
                 if True:
-                    produtos[produto]["quantidade"]=quantidadeEditar
+                    produtos[produto-1]["quantidade"]=quantidadeEditar
                     with open("produtos.json", "w",encoding="utf-8") as arquivo:
                         json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
                     print(f"\033[1mA nova quantidade do Produto é {quantidadeEditar}!\033[0m")
@@ -232,56 +221,10 @@ def admin():
             produto = int(input())
             with open("produtos.json", "r",encoding="utf-8") as produtos_json:
                 produtos = json.load(produtos_json)
-            if produto == 1:
-                produtos.pop(0)
-                with open("produtos.json", "w",encoding="utf-8") as arquivo:
-                    json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
-                print("produto excluido!")
-                if produto == 2:
-                    produtos.pop(1)
-                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
-                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
-                    print("produto excluido!")
-                elif produto == 3:
-                    produtos.pop(2)
-                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
-                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
-                    print("produto excluido!")
-                elif produto == 4:
-                    produtos.pop(3)
-                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
-                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
-                    print("produto excluido!")
-                elif produto == 5:
-                    produtos.pop(4)
-                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
-                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
-                    print("produto excluido!")
-                elif produto == 6:
-                    produtos.pop(5)
-                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
-                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
-                    print("produto excluido!")
-                elif produto == 7:
-                    produtos.pop(6)
-                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
-                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
-                    print("produto excluido!")
-                elif produto == 8:
-                    produtos.pop(7)
-                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
-                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
-                    print("produto excluido!")
-                elif produto == 9:
-                    produtos.pop(8)
-                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
-                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
-                    print("produto excluido!")
-                elif produto == 10:
-                    produtos.pop(9) 
-                    with open("produtos.json", "w",encoding="utf-8") as arquivo:
-                        json.dump(produtos, arquivo,indent=4,ensure_ascii=False)
-                    print("produto excluido!")
+            produtos.pop(produto - 1)
+            with open("produtos.json", "w", encoding="utf-8") as arquivo:
+                json.dump(produtos, arquivo, indent=4, ensure_ascii=False)
+            print("produto excluido!")
         elif ed_ou_ex_DeProdutos == 5:
             print("1")
             return admin()
@@ -313,12 +256,10 @@ def admin():
             print(f"{i+1} - {nome}")
         print("Digite o numero do Clientes:")
         cliente = int(input())
-        for i in usuarios:
-            if cliente == i["nome"]:
-                print("\033[1mUSER ENCONTRADO\033[0m")
-                for i in range(len(usuarios)):
-                    if usuarios[i]["nome"] == cliente:
-                        exCliete = i
+        if cliente < 1 or cliente > len(usuarios):
+            print("Cliente inválido!")
+            tm.sleep(2)
+            return admin()
         print("1️⃣- Editar user!!\n2️⃣- Editar Senha!!\n3️⃣- Excluir User!!\n4️⃣- Voltar!!")
         while True:
             try:
@@ -333,17 +274,12 @@ def admin():
             os.system("cls")
             with open("logins.json", "r", encoding="utf-8") as arquivo:
                 usuarios = json.load(arquivo)
-            for i in usuarios:
-                if cliente == i["nome"]:
-                    for i in range(len(usuarios)):
-                        if usuarios[i]["nome"] == cliente:
-                            edCliete = i
-                            if True:
-                                usuarios[edCliete]["nome"]=novoNome
-                                with open("logins.json", "w",encoding="utf-8") as arquivo:
-                                    json.dump(usuarios, arquivo,indent=4,ensure_ascii=False)
-                                print(f"\033[1mUser Alterado agora seu novo nome é {novoNome}!\033[0m")
-                                tm.sleep(2)
+            if True:
+                usuarios[cliente-1]["nome"]=novoNome
+                with open("logins.json", "w",encoding="utf-8") as arquivo:
+                    json.dump(usuarios, arquivo,indent=4,ensure_ascii=False)
+                print(f"\033[1mUser Alterado agora seu novo nome é {novoNome}!\033[0m")
+                tm.sleep(2)
             return perfil()
         elif editarConta == 2:
             while True:
@@ -416,16 +352,13 @@ def cadastrar():
     nomeNovo = input("Nome do Cliente: ").strip().lower()
     print("OBS: digite apenas os numeros do CPF!!")
     cpf = input("CPF: ").strip().lower()
-    contadorCPF = 0
-    for i in cpf:
-        contadorCPF += 1
-    idade = int(input("Idade: ").lower().strip())
+    idade = int(input("Idade: ").strip())
     while idade <3 or idade>150:
         print("Idade invalida!!")
         idade = int(input("Idade: "))
         if idade >3 and idade<150:
             break
-    if idade > 18 and contadorCPF == 11:
+    if idade > 18 and len(cpf) == 11:
         novoUsuario = {
             "nome": nomeNovo.strip().lower(),
             "idade": idade,
@@ -437,62 +370,42 @@ def cadastrar():
     def produtos():
         global valor
         os.system("cls")
-
-        # carrega os produtos
         with open("produtos.json", "r", encoding="utf-8") as arquivo:
             dados = json.load(arquivo)
-
-        # mostra produtos
         print("Produtos:")
         for i, item in enumerate(dados):
             print(f"{i+1} - {item['nome']} (R$ {item['preco']})")
-
         escolha = int(input("Escolha o produto: ")) - 1
-
-        # produto escolhido
         produto = dados[escolha]
-
         nome = produto["nome"]
         preco = produto["preco"]
         estoque = produto["quantidade"]
-
         if estoque <= 0:
             print("⚠️ Produto fora de estoque!")
             tm.sleep(2)
             return menurAlternativo()
-
         qtd = int(input(f"{nome} tem {estoque} unidades. Comprar quantas? "))
-
         if qtd > estoque:
             print("❌ Não há unidades suficientes!")
             tm.sleep(2)
             return menurAlternativo()
-
-        # atualiza estoque
         produto["quantidade"] = estoque - qtd
-
         with open("produtos.json", "w", encoding="utf-8") as arquivo:
             json.dump(dados, arquivo, indent=4, ensure_ascii=False)
-
-        # registra venda
         valor += qtd * preco
         with open("vendas.json", "r", encoding="utf-8") as arquivo:
             vendas = json.load(arquivo)
-
         vendas.append({
             "produto": nome,
             "quantidade": qtd,
             "valor_unitario": preco,
             "valor_total": qtd * preco
         })
-
         with open("vendas.json", "w", encoding="utf-8") as arquivo:
             json.dump(vendas, arquivo, indent=4, ensure_ascii=False)
-
         print(f"✔ Compra registrada! Valor parcial: R$ {valor}")
         print("1️⃣ Finalizar compra")
         print("2️⃣ Continuar comprando")
-
         r = int(input())
         if r == 1:
             print("Finalizando compra...")
@@ -500,7 +413,7 @@ def cadastrar():
             return menurAlternativo()
         else:
             return produtos()
-    produtos()
+    return produtos()
 def listarVendas():
     os.system("cls")
     with open("vendas.json", "r", encoding="utf-8") as arquivo:
